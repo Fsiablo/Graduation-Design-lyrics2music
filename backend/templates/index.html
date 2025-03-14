@@ -1,0 +1,304 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <link rel="stylesheet"  type="text/css" href="/static/style.css">-->
+<!--    <title>林家小猪测试小站</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div>-->
+<!--    <h1>您好，{{ username }}，欢迎来到我的小站</h1>-->
+<!--        <a href="{{ url_for('user_login') }}">退出</a>-->
+<!--        <br/>-->
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+        }
+        .container {
+            height: 100%;
+            background-image: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+        }
+        .login-wrapper {
+            background-color: #fff;
+            width: 500px;
+            height: 380px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 30%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            float: left;
+        }
+        .header {
+            font-size: 15px;
+            text-align: center;
+            line-height: 50px;
+        }
+        .input-item {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            outline: none;
+        }
+        .input-item:placeholder {
+            text-transform: uppercase;
+        }
+        .btn {
+            background-image: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            color: #fff;
+            float:left;
+            width: 45%;
+            margin-bottom: 20px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            outline: none;
+            margin-right:22px;
+        }
+        .msg {
+            text-align: center;
+            line-height: 88px;
+        }
+        a {
+            text-decoration-line: none;
+            color: #abc1ee;
+        }
+        .lyrics{
+
+            width: 90%;
+            height: 110px;
+            margin-bottom: 20px;
+            border: 10%;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+        }
+        .lyrics_input{
+            background-color: #fff;
+            width: 500px;
+            height: 244px;
+        }
+        .music_gen{
+            width: 500px;
+            height: 344px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 30%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            float: left;
+            margin-left:100px;
+        }
+        /* 定义整个播放器的样式 */
+        .player {
+            width: 500px;
+            height: 344px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 30%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            float: left;
+            margin-left:100px;
+        }
+
+        /* 定义封面的样式 */
+        .player .cover {
+            display: inline-block; /* 内部元素呈现为块级元素 */
+            height: 250px; /* 高度为250px */
+            width: 500px; /* 宽度为250px */
+            margin-left: 0px; /* 距离左侧30px */
+            margin-top: 30px; /* 距离上方30px */
+            overflow: hidden; /* 溢出部分隐藏 */
+            border-radius: 10px; /* 边框半径为10px */
+            float: left;
+        }
+
+        /* 定义歌曲信息的样式 */
+        .song {
+            position: absolute; /* 绝对定位 */
+            margin-left: 50px; /* 距离左侧50px */
+            margin-top: 20px; /* 距离上方20px */
+            left: 250px; /* 左侧距离为250px */
+            top: 100px; /* 上方距离为150px */
+            height: 250px; /* 高度为250px */
+            width: 400px; /* 宽度为400px */
+            overflow: auto; /* 溢出部分自动滚动 */
+            float: left;
+        }
+
+        /* 隐藏滚动条 */
+        div::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 定义p标签的字体样式 */
+        .song p {
+            font-family: "楷体";
+            margin: 5px; /* 上下左右各留出5px的间距 */
+        }
+
+        /* 定义h2标签的字体样式 */
+        .song h2 {
+            font-family: "楷体";
+        }
+
+        /* 设置音频样式 */
+        audio {
+            width: 100%; /* 宽度为100% */
+            height: 50px; /* 高度为50px */
+            border-radius: 10px; /* 边框半径为10px */
+        }
+
+        /* 设置音频播放进度条的颜色 */
+        audio::-webkit-media-controls-progress-bar {
+            background-color: #000;
+        }
+
+        /* 定义播放器的背景颜色 */
+        .player {
+            /* background: linear-gradient(to bottom, #304352, #d7d2cc); */
+            background-color: #fff; /* 背景颜色为rgba(238, 238, 238, 0.2) */
+        }
+
+        /* 隐藏音频播放器的背景颜色 */
+        audio::-webkit-media-controls-enclosure {
+            background-color: rgba(216, 218, 221, 0.0);
+        }
+        .seed{
+            float:left;
+            width: 80px;
+            hight: 40px;
+            margin-bottom: 22px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            margin-right:22px;
+        }
+        .seed_{
+            float:left;
+            width: 75px;
+            hight: 40px;
+            border: 0;
+            padding: 10px;
+            font-size: 15px;
+        }
+        blockquote {
+          background: #eee;
+          border-radius: 5px;
+          margin: 16px 0;
+        }
+
+        blockquote p {
+          padding: 15px;
+        }
+
+        cite {
+          margin: 16px 32px;
+          font-weight: bold;
+        }
+
+        blockquote p::before {
+          content: '\201C';
+        }
+
+        blockquote p::after {
+          content: '\201D';
+        }
+
+        [contenteditable='true'] {
+          caret-color: red;
+        }
+        .handbook{
+            float: left;
+            background-color: #fff;
+            width: 1200px;
+            height: 420px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 16.8%;
+            top: 38%;
+            transform: translate(-50%, -50%);
+        }
+        .steps{
+            position: relative;
+            left: 25%;
+            top:8%;
+        }
+    </style>
+    <script>
+        console.log(222);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <text class="header">输入您的诗词：</text>
+            <div class="lyrics_input">
+                <form method="POST">
+<!--                    <blockquote contenteditable="true">-->
+
+<!--                    </blockquote>-->
+                    <textarea name="lyrics" class="lyrics"></textarea>
+                    <input type="submit" value="提交" name="button" class="btn" style="border:none;"/>
+                    <input type="submit" value="换一首" name="button" class="btn" style="border:none;"/>
+                    <input type="submit" value="下载歌曲" name="button" class="btn" style="border:none;"/>
+                    <input type="submit" value="下载曲谱" name="button" class="btn" style="border:none;"/>
+                    <text class="seed_">随机种子：</text>
+                    <input type="number"  placeholder="种子" name="seed" class="seed" value={{seed}} />
+                </form>
+                <h2>{{ get_flashed_messages()[-1] }}</h2>
+            </div>
+        </div>
+        <div class="player">
+            <!-- 歌曲封面 -->
+            <div class="cover">
+                <img src="static/images/OIP.jpg" alt="">
+            </div>
+                <!-- 歌词设置 -->
+            <div class="song">
+                <p>
+
+                        <!-- 歌词... -->
+                </p>
+            </div>
+                <!-- audio标签 -->
+            <div class="mus">
+                <audio src="{{src}}" type="audio/mp3" controls></audio>
+            </div>
+        </div>
+        <div class="handbook">
+            <img class="steps" src="static/images/step.jpg">
+        </div>
+
+    </div>
+</body>
+</html>

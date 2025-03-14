@@ -1,0 +1,5 @@
+backend/.fluidsynth/dgx62mbsf.sf2 filter=lfs diff=lfs merge=lfs -text
+backend/static/ filter=lfs diff=lfs merge=lfs -text
+backend/static/Midi_Model/final_model filter=lfs diff=lfs merge=lfs -text
+backend/static/pretrained_model/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
+backend/static/Midi_Model/best_model filter=lfs diff=lfs merge=lfs -text
